@@ -117,7 +117,7 @@
     2. 上面第3个[DL4J](http://deeplearning4j.org/)的DBN用在[MNIST](http://yann.lecun.com/exdb/mnist/)上的教程将MNIST先二值化{0,1}, 然后用RBM进行pretrain、backprop, 我尝试了之后发现效果非常非常差劲; 虽然他在里面也有说, 里面可能要调一些参数,但是我调了非常非常久还是没什么效果。当然, 也很可能是我的能力问题...
     3. 第4个DL4J构建DBN用在[Iris](https://archive.ics.uci.edu/ml/datasets/Iris/)上的教程,与第3个不同,使用的是连续数值的RBM,训练的样本比较小,但构建网络的过程还是非常有参考价值的。
     4. 第7个Python的[theano](http://deeplearning.net/)库, 里面的RBM构建起来稍微比较复杂一些, 但代码的质量还挺不错, 所以我最后主要是用它来处理。具体就是在Pretrain完之后使用Logistic Regression来进行回归、分类。
-    5. 第8,第9个使用了[SciPy](http://scikit-learn.org/)里的RBM; 也是在Pretrain完之后使用Logistic Regression来进行回归、分类。SciPy里目前好像还不支持连续值的RBM, 只有离散值的BernouliRBM这个二值的可以用。
+    5. 第8、第9个使用了[SciPy](http://scikit-learn.org/)里的RBM; 也是在Pretrain完之后使用Logistic Regression来进行回归、分类。SciPy里目前好像还不支持连续值的RBM, 只有离散值的BernouliRBM这个二值的可以用。
 
 * Databases:
     1. [MNIST dataset](http://yann.lecun.com/exdb/mnist/)
@@ -145,16 +145,16 @@
         * 二值RBM - DBN ( BinaryDBN.java )
             * 我先尝试使用了binary即二值的DBN网络, 如下, 第三个参数设为true即表示将Mnist的图片进行二值化, 灰度值大于35的即表示成1, 小于35的表示成0:
 
-                  DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,true);
+					DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,true);
 
             * 但是训练出来的结果非常非常差劲, 在pretrain的过程中, 甚至误差越训练越大, 具体的原因我尝试了非常非常久来找,但还是找不出来。最后的分类结果如下, 我甚至怀疑是DL4J本身的库里的RBM函数出了问题, 因为使用别种layer来训练, 同样的训练、测试集、迭代次数,都能有还不错的结果。
 
-                   ==========================Scores========================================
-                    Accuracy:  0.107
-                    Precision: 0.107
-                    Recall:    0.1
-                    F1 Score:  0.1034
-                   =======================================================================
+					==========================Scores========================================
+                     Accuracy:  0.107
+                     Precision: 0.107
+                     Recall:    0.1
+                     F1 Score:  0.1034
+					========================================================================
 
         * FeedForward Layer - Direct backpropagation ( FFbackprop.java )
             * 直接利用FeedForward Layer来进行backpropagation, 层数的设置为:
@@ -165,7 +165,7 @@
         * DBN
 
 * 结论
-    1. 昨晚上述的东西后, 我在网上查阅了一些别人对RBM、DBN、Pretrain等的评价
+    1. 做完上述的东西后, 我在网上查阅了一些别人对RBM、DBN、Pretrain等的评价
 
         > 过时了，没用了，看最近的会议就知道了，今年nips一篇都没有了！
 
@@ -215,7 +215,7 @@
 	2016.6.1 Tring DL4J
 	2016.6.15 Tring SciPy + Opencv
 	2016.6.22 17:24 Finally understood the structure. Built a structure of DBN.
-	2016.6.23 12:52 Sucking binary RBM layers.
+	2016.6.23 12:52 Sucking binary RBM layers by DL4J.
 	2016.6.23 17:17 Writing the reports
 	2016.6.23 22:49 Abandon DL4J, Switching to theano, python
 
