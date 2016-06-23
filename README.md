@@ -4,14 +4,14 @@
 * Work by **_Lin, Tzu-Heng_**, Dept. of Electronic Engineering, Tsinghua University
     * **电子工程系 无42 林子恒 2014011054**
     * Email: _**lzhbrian@gmail.com**_ / **_linzh14@mails.tsinghua.edu.cn_**
-    * My Linkedin Page: [林子恆 Lin, Tzu-Heng](https://cn.linkedin.com/in/lzhbrian)
-* My Java, Python Work for Pattern Recognition Course
+    * My Linkedin Page: [**_林子恆 Lin, Tzu-Heng_**](https://cn.linkedin.com/in/lzhbrian)
+* My Java, Python Work for **_Pattern Recognition Course_**
 * -- Make a DBN to classify a set of test data similar to [MNIST dataset](http://yann.lecun.com/exdb/mnist/) but with 32x32 pixels
     * Using the framework of **_[DeepLeanring4j](http://deeplearning4j.org)_** and **_[theano](http://deeplearning.net/)_**
 
 ***
-* 本篇报告是用markdown语法写的, 在[我的Github库(lzhbrian)](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM)里可以查到本篇报告, 以及报告里所提到代码的源文件
-* This Report is written in markdown syntax, see the original file in my github projects mentioned below. Repository is in my github page: [My Github Project Page](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM)
+* 本篇报告是用markdown语法写的, 在[**_我的Github库(lzhbrian)_**](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM)里可以查到本篇报告, 以及报告里所提到代码的源文件
+* This Report is written in markdown syntax, see the original file in my github projects mentioned below. Repository is in my github page: [**_My Github Project Page(lzhbrian)_**](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM)
 
 
 # 报告 Report
@@ -21,9 +21,9 @@
 ***
 1. 目录 Content
 2. 写在前面 Overall
-    1. 关于 About
-    2. 关于网络上的教程
-    3. 关于本篇报告
+    1. 前言 About
+    2. 关于网络上的教程 About the Tutorials Online
+    3. 关于本篇报告 About this Report
 3. 浅显易懂的解释 Introduction of RBM、DBN、Pretrain、Finetuning
     1. 受限波尔兹曼机 RBM
     2. 深度置信网 DBN
@@ -32,12 +32,12 @@
     1. Website of Resources I have used
     2. Comments
 5. 我的工作 Configure a DBN
-    1. 前期准备: 编程环境、安装库
-    2. 一些代码的解释
+    1. 前期准备: 编程环境、安装库 Prequisites
+    2. 一些代码的解释 Some Explanation
         1. 如何构造一个DBN、DBN的参数含义
         2. 读入老师提供的手写集数据
-    3. 训练效果
-    4. 结论
+    3. 训练效果 Results
+    4. 结论 Conclusions
 6. 写在后面 —— 关于我, 关于模式识别课程 About me, About Pattern Recognition
 7. 附录 Log
 
@@ -47,23 +47,23 @@
 
 ### 2. 写在前面 Overall:
 ***
-* 这个大作业, 我使用了[DeepLearning4j](http://deeplearning4j.org)（以下简称DL4J), 以及[theano](http://www.deeplearning.net/tutorial/DBN.html)的库; [DL4J](http://deeplearning4j.org)在[IntelliJ IDEA CE](https://www.jetbrains.com/idea/)的IDE上进行编程, [theano](http://www.deeplearning.net/tutorial/DBN.html)是直接用[sublime3](http://www.sublimetext.com)写, 用命令行运行。
 
-* 关于 About
-    * 本篇报告使用了[DL4J](http://deeplearning4j.org), 以及[theano](http://www.deeplearning.net/tutorial/DBN.html)的库训练了一个DBN来分类老师所给的32x32手写数据。
+* **_前言 About_**
+    * 本篇报告使用了[DeepLearning4j](http://deeplearning4j.org)（以下简称DL4J), 以及[theano](http://www.deeplearning.net/tutorial/DBN.html)的库训练了一个DBN来分类老师所给的32x32手写数据。
+    * [DL4J](http://deeplearning4j.org)在[IntelliJ IDEA CE](https://www.jetbrains.com/idea/)的IDE上进行编程, [theano](http://www.deeplearning.net/tutorial/DBN.html)是直接用[sublime3](http://www.sublimetext.com)写, 用命令行运行。
     * 其实从第八周后我就开始写这个大作业了, 首先遇到的问题就是要选哪一个库, 那个时候Python和Java都不太熟练, 只会用Matlab。后来, 因为一些别的作业以及在做一些大数据方面的研究, Python以及Java运用得比较熟练了, 所以后来就使用了[theano](http://www.deeplearning.net/tutorial/DBN.html)与[DL4J](http://deeplearning4j.org); (同时,也切身感受到了Matlab的鸡肋,效率实在是太低了。)
 
-* 关于网络上的教程
+* **_关于网络上的教程 About the Tutorials Online_**
     * 再后来看了很多很多RBM相关的教程, 网络上的教程真心都非常非常文言文, 而Hinton的那篇论文如果直接那来看的话其实一般人看不太懂(比如我)...所以我的撞墙期非常非常久, 直到考完试我才比较能够理解RBM、DBN的概念。
 
-* 关于本篇报告
+* **_关于本篇报告 About this Report_**
     * 所以接下来我会...
 
-        * 先介绍以下Hinton在他的那篇[Reducing the Dimensionality of Data with Neural Network论文](http://science.sciencemag.org/content/313/5786/504)(以下简称"文章")里面所说的一些内容, 用正常人都能看懂的话...希望之后的同学可以不要被网上良莠不齐的教程迷惑...
+        * 先介绍一下Hinton在他的那篇[Reducing the Dimensionality of Data with Neural Network论文](http://science.sciencemag.org/content/313/5786/504)(以下简称"文章")里面所说的一些内容, 用正常人都能看懂的话...希望之后的同学可以不要被网上良莠不齐的教程迷惑...
         * 再接下来, 我会给出网上一些库, 包括Matlab、Python、Java的RBM、DBN教程链接, 给出一些个人的比较浅显的理解。
         * 最后给出我使用[DL4J](http://deeplearning4j.org)以及[theano](http://www.deeplearning.net/tutorial/DBN.html)来分类老师给的32x32图片的具体过程。
         * 我还是使用了[MNIST dataset](http://yann.lecun.com/exdb/mnist/)数据集来训练, 最后把测试集的图片剪切掉外面的两筐成28x28的来分类。
-* 由于本人的水平有限, 还望老师、各位同好指出我这篇报告里的不当之处, 谢谢!
+* **_由于本人的水平有限, 还望老师、各位同好指出我这篇报告里的不当之处, 谢谢!_**
 
 
 
@@ -75,18 +75,18 @@
 * Introduction of RBM、DBN、Pretrain、Finetuning, etc
 * 网络上有很多很多RBM、DBN的解释, 但都讲得非常非常不清楚, 导致我卡了很久很久..., 我在这里给出一个一般人也能理解的解释...希望以后的人可以少走弯路。
 
-* 受限波尔兹曼机 RBM (Restricted Boltmann Machine) :
+* **_受限波尔兹曼机 RBM_** (Restricted Boltmann Machine) :
     * RBM就是一个两层的层内没有互相连接, 层间所有都链接的一个二部图(如下图), v对应的这层称visible layer, h对应的这层称hidden layer
     * ![pic From DL4J](http://deeplearning4j.org/img/sym_bipartite_graph_RBM.png)(图片来自DL4J)
     * Hinton在[文章](http://science.sciencemag.org/content/313/5786/504)中指出了一个能量函数, 每一张图片都对应了一个能量, 如下图。
     * ![Energy Func](http://images.cnitblog.com/blog/381513/201303/27152518-dea8b976b8174cb397c343f664ad7910.png)(图片来自网络)
     * 简单来说, 训练一个RBM(无监督学习), 就是要使得这个RBM接收到图片之后对应的能量函数达到最小。那么训练这个RBM有什么用呢? 不要着急。
 
-* 深度置信网 DBN (Deep Believe Network) :
+* **_深度置信网 DBN_** (Deep Believe Network) :
     * 所谓的DBN就是将几层RBM网络堆叠(Stack)起来(如下图), 下层的hiddenLayer等于上层的visibleLayer, 这样就可以形成一个多层神经网络(Neural Network), 训练方法其实就是从低到高一层一层的来训练RBM。
     * ![DBN](http://deeplearning.net/tutorial/_images/DBN3.png)(图片来自theano)
 
-* 预训练-调整 Pretrain (Initialize a good initial weight) - Finetuning(Backpropagation):
+* **_预训练-调整 Pretrain_** (Initialize a good initial weight) - Finetuning(Backpropagation):
     * Hinton在[文章](http://science.sciencemag.org/content/313/5786/504)中提到, 多层神经网络有一个很本质的问题就在于使用如后向传播算法(backpropagation)来迭代网络时很依赖于初始值的选择, 非常容易就掉入到局部极小值的点。
     * 其实整篇文章的重点就在于:
         1. 先pretrain: 将一个DBN pretrain出来一个很好的初始值供第二步使用, 避免掉入局部极小;
@@ -127,27 +127,66 @@
 ***
 * 由于我主要使用的是[DL4J](http://deeplearning4j.org/)以及[theano](http://deeplearning.net/), 其他的一些库的具体操作就不在这里写出来了, 在我提供的上述网址里都可以找到还不错的教程!
 
-* 前期准备: 编译环境、安装库
-    * DL4J
+* **前期准备: 编译环境、安装库 Prequisites**
+    * **_DL4J_**
         * 首先先按照了[DL4J的官方QUICKSTART](http://deeplearning4j.org/quickstart)网站, 搭建好了框架, 需要安装的工具有[github](https://github.com)、[maven](http://maven.apache.org)、[java](http://www.oracle.com/technetwork/java/javase/downloads/index.html)等, 官方推荐使用的IDE是[IntelliJ IDEA CE](https://www.jetbrains.com/idea/), 我现在在写的这个.md也是用这个IDE编辑的, 个人感觉其实用起来还是蛮舒服的。
 
-    * theano
+    * **_theano_**
         * 如果已经安装好了[Python](https://www.python.org), [pip](https://pip.pypa.io/en/stable/)等工具, 那就只需要```pip install theano```就可以了, 还需安装的库还有[PIL](http://www.pythonware.com/products/pil/#pil117), [NumPy](http://www.numpy.org)等
 
-* 一些代码的解释
+* **一些代码的解释 Some Explanation**
     1. 如何构造一个DBN、DBN的参数含义
+	    * **_DL4J_**
+	    * 使用DL4J来构造一个DBN非常非常简单, 比如如下给出的代码, 是二值DBN所使用的构造, 该DBN的结构为：784-500-500-2000-10
+	    * 具体参数的解释参见[DL4J的网站教程](http://deeplearning4j.org/iris-flower-dataset-tutorial), [JAVADOC](http://deeplearning4j.org/doc/), [JAVADOC for ND4J](http://nd4j.org/doc/)
+
+				MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
+				            .seed(seed)
+				            .gradientNormalization(GradientNormalization.ClipElementWiseAbsoluteValue)
+				            .gradientNormalizationThreshold(1.0)
+				            .iterations(iterations)
+				            .momentum(0.5)
+				            .momentumAfter(Collections.singletonMap(3, 0.9))
+				            .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
+				            .list(4)
+				            .layer(0, new RBM.Builder().nIn(numRows*numColumns).nOut(500)
+				                .weightInit(WeightInit.XAVIER).lossFunction(LossFunction.RMSE_XENT)
+				                .visibleUnit(RBM.VisibleUnit.BINARY)
+				                .hiddenUnit(RBM.HiddenUnit.BINARY)
+				                .build())
+				            .layer(1, new RBM.Builder().nIn(500).nOut(500)
+				                .weightInit(WeightInit.XAVIER).lossFunction(LossFunction.RMSE_XENT)
+				                .visibleUnit(RBM.VisibleUnit.BINARY)
+				                .hiddenUnit(RBM.HiddenUnit.BINARY)
+				                .build())
+				            .layer(2, new RBM.Builder().nIn(500).nOut(2000)
+				                .weightInit(WeightInit.XAVIER).lossFunction(LossFunction.RMSE_XENT)
+				                .visibleUnit(RBM.VisibleUnit.BINARY)
+				                .hiddenUnit(RBM.HiddenUnit.BINARY)
+				                .build())
+				            .layer(3, new OutputLayer.Builder(LossFunction.NEGATIVELOGLIKELIHOOD).activation("softmax")
+				                .nIn(2000).nOut(outputNum).build())
+				            .pretrain(true).backprop(false)
+				            .build();
+	    * **_theano_**
+	    * 
+    
+    
+    
     2. 读入老师提供的手写集数据
         * 这里给出如何利用python读入老师所给数据的方法
 
-
-* 训练结果
-    * DL4J
+        
+        
+* **训练结果 Results**
+    * **_DL4J_** : 这里并没有用老师的数据进行测试, 因为构造出来的DBN, 使用MNIST本身进行测试就仅能有非常非常非常糟糕的结果。
         * 二值RBM - DBN ( BinaryDBN.java )
-            * 我先尝试使用了binary即二值的DBN网络, 如下, 第三个参数设为true即表示将Mnist的图片进行二值化, 灰度值大于35的即表示成1, 小于35的表示成0:
+            * 我先尝试使用了binary即二值的DBN网络;
+            *  如下, 第三个参数设为true即表示将Mnist的图片进行二值化, 灰度值大于35的即表示成1, 小于35的表示成0:
 
 					DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,true);
-
-            * 但是训练出来的结果非常非常差劲, 在pretrain的过程中, 甚至误差越训练越大, 具体的原因我尝试了非常非常久来找,但还是找不出来。最后的分类结果如下, 我甚至怀疑是DL4J本身的库里的RBM函数出了问题, 因为使用别种layer来训练, 同样的训练、测试集、迭代次数,都能有还不错的结果。
+            * 但是训练出来的结果非常非常差劲, 在pretrain的过程中, 甚至误差越训练越大, 具体的原因我找了非常非常久, 调试了各种各样的参数, 但还是找不出来我的代码里到底哪里有问题。
+            * 最后的分类结果如下, 我甚至怀疑是DL4J本身的库里的RBM函数出了问题, 因为使用别种layer来训练, 同样的训练、测试集、迭代次数,都能有还不错的结果。
 
 					==========================Scores========================================
                      Accuracy:  0.107
@@ -155,16 +194,33 @@
                      Recall:    0.1
                      F1 Score:  0.1034
 					========================================================================
-
         * FeedForward Layer - Direct backpropagation ( FFbackprop.java )
-            * 直接利用FeedForward Layer来进行backpropagation, 层数的设置为:
-            * 迭代次数设置为
-            * 结果非常好,最后的结果可以达到:
+            * 直接利用FeedForward Layer来进行backpropagation, 层数的设置为:`784-1000-10`
+            * 每个训练迭代集个数为128(batchSize: 128), 从MNIST数据集中随机取出10000个元素, 一共对全部的元素训练15次(15 Epochs)
+            * 结果非常好, 最后的结果可以达到:
 
-    * theano
-        * DBN
+					==========================Scores========================================
+					 Accuracy:  0.971
+					 Precision: 0.9709
+					 Recall:    0.9707
+					 F1 Score:  0.9708
+					========================================================================
+    * _**theano**_ : 这里使用了老师的数据集来进行测试
+        * DBN ( DBN.py )
+        * 构造的DBN结构为：784-1000-1000-1000, 
+        * 使用的预处理数据集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
+        * 使用的backprop训练集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
+        * 一共对全部的元素训练10次(10 Epochs)。
+        * 最后结果如下：
 
-* 结论
+				Optimization complete with best validation score of 2.020000 %, 
+				obtained at iteration 50000, with test performance 1.840000 %
+        
+        
+        
+        
+
+* **结论 Conclusions**
     1. 做完上述的东西后, 我在网上查阅了一些别人对RBM、DBN、Pretrain等的评价
 
         > 过时了，没用了，看最近的会议就知道了，今年nips一篇都没有了！
@@ -218,11 +274,12 @@
 	2016.6.23 12:52 Sucking binary RBM layers by DL4J.
 	2016.6.23 17:17 Writing the reports
 	2016.6.23 22:49 Abandon DL4J, Switching to theano, python
+	2016.6.24 01:50 Started Python Debugging
 
 
 
 ***
 
-* 林子恒 2016.6.24 凌晨
-* Lin, Tzu-Heng
-* 2016.6.24 before down
+* **林子恒 2016.6.24 凌晨**
+* **_Lin, Tzu-Heng_**
+* **_2016.6.24 before down_**
