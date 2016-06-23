@@ -26,9 +26,9 @@ import java.util.Collections;
  *
  * ***** NOTE: This example has not been tuned. It requires additional work to produce sensible results *****
  */
-public class Pattern_Final_RBM {
+public class BinaryDBN {
 
-    private static Logger log = LoggerFactory.getLogger(Pattern_Final_RBM.class);
+    private static Logger log = LoggerFactory.getLogger(BinaryDBN.class);
 
     public static void main(String[] args) throws Exception {
         final int numRows = 28;
