@@ -1,4 +1,5 @@
-## Pattern Recognition Work for a dataset similar to MNIST
+# Pattern Recognition Work
+-- For a dataset similar to MNIST
 
 * Work by Lin, Tzu-Heng, Dept. of Electronic Engineering, Tsinghua University
 * Email: lzhbrian@gmail.com
@@ -16,11 +17,20 @@
 	2016.6.23 12:52 Sucking binary RBM layers.
 
 
-## 报告 Reports
+# 报告 Reports
 
 
-#### 写在前面 Overall:
+### 目录:
+***
+1. 写在前面 overall
+2. 浅显易懂的解释 Introduction of RBM、DBN、AutoEncoder、Finetuning, etc
+3. 库的介绍与选择 Choice of Tools
+4. 我的工作 Configure a DBN
 
+
+
+### 1. 写在前面 Overall:
+***
 * 这个大作业,我使用了DeepLearning4j（以下简称DL4J）的库,在IntelliJ IDEA CE的IDE上进行编程。
 
 
@@ -39,7 +49,8 @@
 * 由于本人的水平有限,还望老师、各位指出我这篇报告里的不当之处,谢谢!
 
 
-#### 浅显易懂的解释RBM、DBN:
+### 2. 浅显易懂的解释RBM、DBN:
+***
 Introduction of RBM、DBN、AutoEncoder、Finetuning, etc
 
 ##### RBM (Restricted Boltmann Machine) :
@@ -65,7 +76,8 @@ Introduction of RBM、DBN、AutoEncoder、Finetuning, etc
 
 
 
-#### 库的选择 Choice of Tools:
+### 3. 库的介绍与选择 Choice of Tools:
+***
 
 * 我也尝试使用了Python的Theano,以及SciPy＋Opencv的组合等;
 * 但相较于DL4J,上述的这些库有的比较麻烦,有的功能较局限,因此最后还是选择了DL4J。
@@ -93,7 +105,8 @@ Introduction of RBM、DBN、AutoEncoder、Finetuning, etc
 * Databases:
     1. [MNIST database](http://yann.lecun.com/exdb/mnist/)
 
-#### 我的工作 Configure a DBN (Stacked by RBMs):
+### 4. 我的工作 Configure a DBN (Stacked by RBMs):
+***
 
     我先尝试使用了binary即二值的DBN网络，二值的方法是使用DL4j自带的函数dataSetlterator，
     如下，第三个参数设为true即表示将Mnist的图片进行二值化，灰度值大于35的即表示成1，小于35的表示成0
