@@ -137,7 +137,8 @@
 * **一些代码的解释 Some Explanation**
     1. 如何构造一个DBN、DBN的参数含义
 	    * **_DL4J_**
-	    * 使用DL4J来构造一个DBN非常非常简单, 比如如下给出的代码, 是二值DBN所使用的构造, 该DBN的结构为：784-500-500-2000-10
+	    * 使用DL4J来构造一个DBN非常非常简单
+	    * 比如如下给出的代码, 是二值DBN所使用的构造, 该DBN的结构为：784-500-500-2000-10
 	    * 具体参数的解释参见[DL4J的网站教程](http://deeplearning4j.org/iris-flower-dataset-tutorial), [JAVADOC](http://deeplearning4j.org/doc/), [JAVADOC for ND4J](http://nd4j.org/doc/)
 
 				MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
@@ -257,9 +258,10 @@
     * 总之, 虽然花了挺多的时间, 但在模式识别的这门课上我学到了非常非常多有用的东西、学习方法; 人工智能是21世纪的一个前沿课题, 现在好多好多的各种应用都在与人工智能扯上关系, 而模式识别, 可以说是作为人工智能的一个最基础的学科了。
 
     * 这个学期我也参加了一个SRT项目, 关于大数据的电商分析。前阵子与一名我们系的博士生以及本科生co-author了一篇paper, 现在正在投稿到[Ubicomp](http://ubicomp.org/ubicomp2016/), 不知道能否被接受;但不得不说的是, 我在分析数据时使用的一些方法就是在课程当中学到的内容, 学以致用的感觉让我非常满足。
-    * _**与老师相处的这一个学期非常愉快, 希望以后还有机会可以上老师的课!**_
 
-    * _**最后, 谢谢老师、助教这一学期来的帮助与指导!**_
+	***
+	* _**与老师相处的这一个学期非常愉快, 希望以后还有机会可以上老师的课 !**_
+	* _**最后, 谢谢老师、助教这一学期来的帮助与指导 !**_
 
 
 ### 7. 附录 Log
@@ -280,6 +282,8 @@
 
 ***
 
-* **林子恒 2016.6.24 凌晨**
-* **_Lin, Tzu-Heng_**
-* **_2016.6.24 before down_**
+* 林子恒 2016.6.24 凌晨
+* Lin, Tzu-Heng
+* 2016.6.24 before down
+
+Copyright 2016 [**Lin, Tzu-Heng**](https://cn.linkedin.com/in/lzhbrian)
