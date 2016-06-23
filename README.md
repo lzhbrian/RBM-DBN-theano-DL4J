@@ -77,14 +77,17 @@
 
 * **_受限波尔兹曼机 RBM_** (Restricted Boltmann Machine) :
     * RBM就是一个两层的层内没有互相连接, 层间所有都链接的一个二部图(如下图), v对应的这层称visible layer, h对应的这层称hidden layer
-    * ![pic From DL4J](http://deeplearning4j.org/img/sym_bipartite_graph_RBM.png)(图片来自DL4J)
+    * ![pic From DL4J](http://deeplearning4j.org/img/sym_bipartite_graph_RBM.png)
+    * (图片来自DL4J)
     * Hinton在[文章](http://science.sciencemag.org/content/313/5786/504)中指出了一个能量函数, 每一张图片都对应了一个能量, 如下图。
-    * ![Energy Func](http://images.cnitblog.com/blog/381513/201303/27152518-dea8b976b8174cb397c343f664ad7910.png)(图片来自网络)
+    * ![Energy Func](http://images.cnitblog.com/blog/381513/201303/27152518-dea8b976b8174cb397c343f664ad7910.png)
+    * (图片来自网络)
     * 简单来说, 训练一个RBM(无监督学习), 就是要使得这个RBM接收到图片之后对应的能量函数达到最小。那么训练这个RBM有什么用呢? 不要着急。
 
 * **_深度置信网 DBN_** (Deep Believe Network) :
     * 所谓的DBN就是将几层RBM网络堆叠(Stack)起来(如下图), 下层的hiddenLayer等于上层的visibleLayer, 这样就可以形成一个多层神经网络(Neural Network), 训练方法其实就是从低到高一层一层的来训练RBM。
-    * ![DBN](http://deeplearning.net/tutorial/_images/DBN3.png)(图片来自theano)
+    * ![DBN](http://deeplearning.net/tutorial/_images/DBN3.png)
+    * (图片来自theano)
 
 * **_预训练-调整 Pretrain_** (Initialize a good initial weight) - Finetuning(Backpropagation):
     * Hinton在[文章](http://science.sciencemag.org/content/313/5786/504)中提到, 多层神经网络有一个很本质的问题就在于使用如后向传播算法(backpropagation)来迭代网络时很依赖于初始值的选择, 非常容易就掉入到局部极小值的点。
@@ -135,13 +138,15 @@
         * 如果已经安装好了[Python](https://www.python.org), [pip](https://pip.pypa.io/en/stable/)等工具, 那就只需要```pip install theano```就可以了, 还需安装的库还有[PIL](http://www.pythonware.com/products/pil/#pil117), [NumPy](http://www.numpy.org)等
 
 * **一些代码的解释 Some Explanation**
-    1. 如何构造一个DBN、DBN的参数含义
-	    * **_DL4J_**
-	    * 使用DL4J来构造一个DBN非常非常简单
-	    * 比如如下给出的代码, 是二值DBN所使用的构造, 该DBN的结构为：784-500-500-2000-10
-	    * 具体参数的解释参见[DL4J的网站教程](http://deeplearning4j.org/iris-flower-dataset-tutorial), [JAVADOC](http://deeplearning4j.org/doc/), [JAVADOC for ND4J](http://nd4j.org/doc/)
 
-				MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
+    1. 如何构造一个DBN、DBN的参数含义
+
+	    * **_DL4J_**
+	        * 使用DL4J来构造一个DBN非常非常简单
+	        * 比如如下给出的代码, 是二值DBN所使用的构造, 该DBN的结构为：784-500-500-2000-10
+	        * 具体参数的解释参见[DL4J的网站教程](http://deeplearning4j.org/iris-flower-dataset-tutorial), [JAVADOC](http://deeplearning4j.org/doc/), [JAVADOC for ND4J](http://nd4j.org/doc/)
+
+				    MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
 				            .seed(seed)
 				            .gradientNormalization(GradientNormalization.ClipElementWiseAbsoluteValue)
 				            .gradientNormalizationThreshold(1.0)
@@ -169,16 +174,19 @@
 				                .nIn(2000).nOut(outputNum).build())
 				            .pretrain(true).backprop(false)
 				            .build();
-	    * **_theano_**
-	    * 
-    
-    
-    
-    2. 读入老师提供的手写集数据
-        * 这里给出如何利用python读入老师所给数据的方法
+	   * **_theano_**
+	     * 使用theano来构造一个DBN也非常简单，因为库函数都已经写好了只需调用函数并写上参数即可, 如下的代码便可生成一个784-1000-1000-1000-10的DBN
+	     * 具体的参数设置解释参见[Official Totorial](http://deeplearning.net/tutorial/DBN.html), [theano DOC](http://deeplearning.net/tutorial/contents.html)
 
-        
-        
+					dbn = DBN(numpy_rng=numpy_rng, n_ins=28 * 28,
+		              hidden_layers_sizes=[1000, 1000, 1000],
+		              n_outs=10)
+
+    2. 读入老师提供的手写集数据
+    	* 这里给出如何利用python读入老师所给数据的方法
+
+
+
 * **训练结果 Results**
     * **_DL4J_** : 这里并没有用老师的数据进行测试, 因为构造出来的DBN, 使用MNIST本身进行测试就仅能有非常非常非常糟糕的结果。
         * 二值RBM - DBN ( BinaryDBN.java )
@@ -208,18 +216,18 @@
 					========================================================================
     * _**theano**_ : 这里使用了老师的数据集来进行测试
         * DBN ( DBN.py )
-        * 构造的DBN结构为：784-1000-1000-1000, 
+        * 构造的DBN结构为：784-1000-1000-1000-10,
         * 使用的预处理数据集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
         * 使用的backprop训练集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
         * 一共对全部的元素训练10次(10 Epochs)。
         * 最后结果如下：
 
-				Optimization complete with best validation score of 2.020000 %, 
+				Optimization complete with best validation score of 2.020000 %,
 				obtained at iteration 50000, with test performance 1.840000 %
-        
-        
-        
-        
+
+
+
+
 
 * **结论 Conclusions**
     1. 做完上述的东西后, 我在网上查阅了一些别人对RBM、DBN、Pretrain等的评价
