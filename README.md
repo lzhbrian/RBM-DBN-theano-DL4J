@@ -183,7 +183,8 @@
 		              n_outs=10)
 
     2. 读入老师提供的手写集数据
-    	* 这里给出如何利用python读入老师所给数据的方法
+    	* 这里给出如何利用python读入老师所给数据的方法, 读入数据后还要把它剪成28x28的大小, 同时也要调整灰度值, 因为老师的数据的与
+
 
 
 
@@ -285,13 +286,13 @@
 	2016.6.23 17:17 Writing the reports
 	2016.6.23 22:49 Abandon DL4J, Switching to theano, python
 	2016.6.24 01:50 Started Python Debugging
-
+	2016.6.24 03:13 I'm going to go to sleep first.
 
 
 ***
 
-* 林子恒 2016.6.24 凌晨
+* 林子恒 2016.6.24 中午
 * Lin, Tzu-Heng
-* 2016.6.24 before down
+* 2016.6.24 noon
 
 Copyright 2016 [**Lin, Tzu-Heng**](https://cn.linkedin.com/in/lzhbrian)
