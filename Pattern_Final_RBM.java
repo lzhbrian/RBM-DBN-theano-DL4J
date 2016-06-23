@@ -41,7 +41,7 @@ public class Pattern_Final_RBM {
         int listenerFreq = 1; //batchSize / 5;
 
         log.info("Load data....");
-        DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,false);
+        DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,true);
 
         log.info("Build model....");
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
@@ -83,7 +83,7 @@ public class Pattern_Final_RBM {
         log.info("Evaluate model....");
         Evaluation eval = new Evaluation(outputNum);
 
-        DataSetIterator testIter = new MnistDataSetIterator(100,10000,false);
+        DataSetIterator testIter = new MnistDataSetIterator(100,10000,true);
         while(testIter.hasNext()) {
             DataSet testMnist = testIter.next();
             INDArray predict2 = model.output(testMnist.getFeatureMatrix());
