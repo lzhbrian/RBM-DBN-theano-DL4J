@@ -6,7 +6,7 @@
     * Email: _**lzhbrian@gmail.com**_ / **_linzh14@mails.tsinghua.edu.cn_**
     * My Linkedin Page: [**_林子恆 Lin, Tzu-Heng_**](https://cn.linkedin.com/in/lzhbrian)
 * My Java, Python Work for **_Pattern Recognition Course_**
-* -- Make a DBN to classify a set of test data similar to [MNIST dataset](http://yann.lecun.com/exdb/mnist/) but with 32x32 pixels
+* -- Make a DBN to classify [a set of test data](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/testdataset) similar to [MNIST dataset](http://yann.lecun.com/exdb/mnist/) but with 32x32 pixels
     * Using the framework of **_[DeepLeanring4j](http://deeplearning4j.org)_** and **_[theano](http://deeplearning.net/)_**
 
 ***
@@ -63,6 +63,7 @@
         * 再接下来, 我会给出网上一些库, 包括Matlab、Python、Java的RBM、DBN教程链接, 给出一些个人的比较浅显的理解。
         * 最后给出我使用[DL4J](http://deeplearning4j.org)以及[theano](http://www.deeplearning.net/tutorial/DBN.html)来分类老师给的32x32图片的具体过程。
         * 我还是使用了[MNIST dataset](http://yann.lecun.com/exdb/mnist/)数据集来训练, 最后把测试集的图片剪切掉外面的两筐成28x28的来分类。
+
 * **_由于本人的水平有限, 还望老师、各位同好指出我这篇报告里的不当之处, 谢谢!_**
 
 
@@ -182,10 +183,65 @@
 		              hidden_layers_sizes=[1000, 1000, 1000],
 		              n_outs=10)
 
-    2. 读入老师提供的手写集数据
-    	* 这里给出如何利用python读入老师所给数据的方法, 读入数据后还要把它剪成28x28的大小, 同时也要调整灰度值, 因为老师的数据的与
+    2. 读入老师提供的手写集数据 ( importpic.py )
+        * 这里给出如何利用Python读入老师所给数据的方法
+        * 读入数据后还要把它剪成28x28的大小, 同时也要转换成灰度值, 并且转换成[theano](http://deeplearning.net/)可读的文件类型
+        * 这个文档是我测试用的.py, 具体的实现已经内嵌到[DBN.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/theano/code/)里了
+        * 处理图片使用的库是[Opencv](http://opencv.org)以及[NumPy](http://www.numpy.org)
 
+        1. 首先先对文件重新命名
 
+                # 重命名
+                for item in os.listdir(dire):
+                    os.chdir(dire)
+                    os.rename(item, item[4:7]+'.png')
+
+        2. 将图片截取成28x28的大小, 我这里最后把它存进了 [./modified_testdataset](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/modified_testdataset)
+
+                # 截取图片成28x28
+                for item in os.listdir(dire):
+                    if item.endswith('.png'):
+                        # Read in the files
+                        img = cv2.imread(dire+item)
+                        print str(img)
+                        img2 = img[2:30,2:30]
+                        cv2.imwrite(item[0:3]+'.png',img2)
+
+        3. 将所有图片数据存入一个矩阵, 标签数据存入一个数组
+
+                label = [] # 标签数组
+                flag = 0
+                # target 存测试集矩阵
+                for item in os.listdir(dire):
+                    # 如果是文件且后缀名是.png
+                    if item.endswith('.png'):
+                        # Read in the files
+                        img = cv2.imread(dire+item)
+                        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 转换为grayscle
+                        img = img.reshape(1,784) # 变成1x784的矩阵
+                        if flag == 0:
+                            target = 255 - img
+                            flag = 1
+                        else:
+                            target = numpy.row_stack((target, 255 - img))
+                        label.append(int(item[0]))
+
+        4. theano要求dataset必须要share过...具体share是什么参见[Elementwise](http://deeplearning.net/software/theano/library/tensor/basic.html#elementwise), [Tensortype](http://deeplearning.net/software/theano/library/tensor/basic.html)
+
+                # share, readable by theano
+                test_X_matrix = numpy.asarray(target,dtype = float)
+                test_set_x = theano.shared(test_X_matrix) #
+
+                test_Y_vector = numpy.asarray(label)
+                shared_var_Y = theano.shared(test_Y_vector)
+                test_set_y = T.cast(shared_var_Y, 'int32') #
+
+        5. 最后读入的数据类型:
+
+                <TensorType(float64, matrix)>
+                Elemwise{Cast{int32}}.0
+
+        6. 然后就可以愉快的用[theano](http://deeplearning.net/)测试老师给的数据啦啦!
 
 
 * **训练结果 Results**
@@ -194,7 +250,8 @@
             * 我先尝试使用了binary即二值的DBN网络;
             *  如下, 第三个参数设为true即表示将Mnist的图片进行二值化, 灰度值大于35的即表示成1, 小于35的表示成0:
 
-					DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,true);
+                    DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,true);
+
             * 但是训练出来的结果非常非常差劲, 在pretrain的过程中, 甚至误差越训练越大, 具体的原因我找了非常非常久, 调试了各种各样的参数, 但还是找不出来我的代码里到底哪里有问题。
             * 最后的分类结果如下, 我甚至怀疑是DL4J本身的库里的RBM函数出了问题, 因为使用别种layer来训练, 同样的训练、测试集、迭代次数,都能有还不错的结果。
 
@@ -204,6 +261,7 @@
                      Recall:    0.1
                      F1 Score:  0.1034
 					========================================================================
+
         * FeedForward Layer - Direct backpropagation ( DL4J/FFbackprop.java )
             * 直接利用FeedForward Layer来进行backpropagation, 层数的设置为:`784-1000-10`
             * 每个训练迭代集个数为128(batchSize: 128), 从MNIST数据集中随机取出10000个元素, 一共对全部的元素训练15次(15 Epochs)
@@ -215,6 +273,7 @@
 					 Recall:    0.9707
 					 F1 Score:  0.9708
 					========================================================================
+
     * _**theano**_ : 这里使用了老师的数据集来进行测试
         * DBN ( theano/DBN.py )
         * 构造的DBN结构为：784-1000-1000-1000-10,
