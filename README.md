@@ -77,10 +77,10 @@
 
 * **_受限波尔兹曼机 RBM_** (Restricted Boltmann Machine) :
     * RBM就是一个两层的层内没有互相连接, 层间所有都链接的一个二部图(如下图), v对应的这层称visible layer, h对应的这层称hidden layer
-    * ![pic From DL4J](http://deeplearning4j.org/img/sym_bipartite_graph_RBM.png)
+    * ![pic From DL4J](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/RBM.png)
     * (图片来自DL4J)
-    * Hinton在[文章](http://science.sciencemag.org/content/313/5786/504)中指出了一个能量函数, 每一张图片都对应了一个能量, 如下图。
-    * ![Energy Func](http://images.cnitblog.com/blog/381513/201303/27152518-dea8b976b8174cb397c343f664ad7910.png)
+    * Hinton在[文章](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/EnergyFunction.png)中指出了一个能量函数, 每一张图片都对应了一个能量, 如下图。
+    * ![Energy Func](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/DBN.png)
     * (图片来自网络)
     * 简单来说, 训练一个RBM(无监督学习), 就是要使得这个RBM接收到图片之后对应的能量函数达到最小。那么训练这个RBM有什么用呢? 不要着急。
 
@@ -190,7 +190,7 @@
 
 * **训练结果 Results**
     * **_DL4J_** : 这里并没有用老师的数据进行测试, 因为构造出来的DBN, 使用MNIST本身进行测试就仅能有非常非常非常糟糕的结果。
-        * 二值RBM - DBN ( BinaryDBN.java )
+        * 二值RBM - DBN ( DL4J/BinaryDBN.java )
             * 我先尝试使用了binary即二值的DBN网络;
             *  如下, 第三个参数设为true即表示将Mnist的图片进行二值化, 灰度值大于35的即表示成1, 小于35的表示成0:
 
@@ -204,7 +204,7 @@
                      Recall:    0.1
                      F1 Score:  0.1034
 					========================================================================
-        * FeedForward Layer - Direct backpropagation ( FFbackprop.java )
+        * FeedForward Layer - Direct backpropagation ( DL4J/FFbackprop.java )
             * 直接利用FeedForward Layer来进行backpropagation, 层数的设置为:`784-1000-10`
             * 每个训练迭代集个数为128(batchSize: 128), 从MNIST数据集中随机取出10000个元素, 一共对全部的元素训练15次(15 Epochs)
             * 结果非常好, 最后的结果可以达到:
@@ -216,7 +216,7 @@
 					 F1 Score:  0.9708
 					========================================================================
     * _**theano**_ : 这里使用了老师的数据集来进行测试
-        * DBN ( DBN.py )
+        * DBN ( theano/DBN.py )
         * 构造的DBN结构为：784-1000-1000-1000-10,
         * 使用的预处理数据集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
         * 使用的backprop训练集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
