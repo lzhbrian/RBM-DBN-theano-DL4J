@@ -246,7 +246,7 @@
 
 * **训练结果 Results**
     * **_[DL4J](http://deeplearning4j.org)_** : 这里并没有用老师的数据进行测试, 因为构造出来的DBN, 使用MNIST本身进行测试就仅能有非常非常非常糟糕的结果。
-        * 二值RBM - DBN ( [DL4J/BinaryDBN.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J) )
+        * 二值RBM - DBN ( [DL4J/BinaryDBN.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J/BinaryDBN.java) )
             * 我先尝试使用了binary即二值的DBN网络;
             *  如下, 第三个参数设为true即表示将Mnist的图片进行二值化, 灰度值大于35的即表示成1, 小于35的表示成0:
 
@@ -262,7 +262,7 @@
                      F1 Score:  0.1034
 					========================================================================
 
-        * FeedForward Layer - Direct backpropagation ( [DL4J/FFbackprop.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J) )
+        * FeedForward Layer - Direct backpropagation ( [DL4J/FFbackprop.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J/FFbackprop.java) )
             * 直接利用FeedForward Layer来进行backpropagation, 层数的设置为:`784-1000-10`
             * 每个训练迭代集个数为128(batchSize: 128), 从MNIST数据集中随机取出10000个元素, 一共对全部的元素训练15次(15 Epochs)
             * 结果非常好, 最后的结果可以达到:
@@ -275,7 +275,7 @@
 					========================================================================
 
     * _**[theano](http://www.deeplearning.net/software/theano/)**_ : 这里使用了老师的数据集来进行测试
-        * DBN ( [theano/DBN.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/theano/code) )
+        * DBN ( [theano/DBN.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/theano/code/DBN.py) )
         * 构造的DBN结构为：784-1000-1000-1000-10,
         * 使用的预处理数据集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
         * 使用的backprop训练集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
