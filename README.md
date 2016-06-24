@@ -77,16 +77,16 @@
 
 * **_受限波尔兹曼机 RBM_** (Restricted Boltmann Machine) :
     * RBM就是一个两层的层内没有互相连接, 层间所有都链接的一个二部图(如下图), v对应的这层称visible layer, h对应的这层称hidden layer
-    * ![pic From DL4J](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/RBM.png)
+    * ![pic From DL4J](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/Resources/RBM.png)
     * (图片来自DL4J)
-    * Hinton在[文章](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/EnergyFunction.png)中指出了一个能量函数, 每一张图片都对应了一个能量, 如下图。
-    * ![Energy Func](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/DBN.png)
+    * Hinton在[文章](http://science.sciencemag.org/content/313/5786/504)中指出了一个能量函数, 每一张图片都对应了一个能量, 如下图。
+    * ![Energy Func](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/Resources/EnergyFunction.png)
     * (图片来自网络)
     * 简单来说, 训练一个RBM(无监督学习), 就是要使得这个RBM接收到图片之后对应的能量函数达到最小。那么训练这个RBM有什么用呢? 不要着急。
 
 * **_深度置信网 DBN_** (Deep Believe Network) :
     * 所谓的DBN就是将几层RBM网络堆叠(Stack)起来(如下图), 下层的hiddenLayer等于上层的visibleLayer, 这样就可以形成一个多层神经网络(Neural Network), 训练方法其实就是从低到高一层一层的来训练RBM。
-    * ![DBN](http://deeplearning.net/tutorial/_images/DBN3.png)
+    * ![DBN](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/Resources/DBN.png)
     * (图片来自theano)
 
 * **_预训练-调整 Pretrain_** (Initialize a good initial weight) - Finetuning(Backpropagation):
