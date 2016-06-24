@@ -231,10 +231,10 @@ class DBN(object):
                 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 转换为grayscle
                 img = img.reshape(1,784) # 变成1x784的矩阵
                 if flag == 0:
-                    target = img #255 - img
+                    target = 255 - img
                     flag = 1
                 else:
-                    target = numpy.row_stack((target, img))#255 - img))
+                    target = numpy.row_stack((target, 255 - img))
                 label.append(int(item[0]))
 
         test_X_matrix = numpy.asarray(target,dtype = float)
@@ -368,10 +368,10 @@ def test_DBN(finetune_lr=0.1, pretraining_epochs=100,
             img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 转换为grayscle
             img = img.reshape(1,784) # 变成1x784的矩阵
             if flag == 0:
-                target = img #255 - img
+                target = 255 - img
                 flag = 1
             else:
-                target = numpy.row_stack((target, img))#255 - img))
+                target = numpy.row_stack((target, 255 - img))
             label.append(int(item[0]))
 
     test_X_matrix = numpy.asarray(target,dtype = float)
@@ -389,7 +389,7 @@ def test_DBN(finetune_lr=0.1, pretraining_epochs=100,
     print '... building the model'
     # construct the Deep Belief Network
     dbn = DBN(numpy_rng=numpy_rng, n_ins=28 * 28,
-              hidden_layers_sizes=[1000, 1000, 1000],
+              hidden_layers_sizes=[500, 500, 2000],
               n_outs=10)
 
     # start-snippet-2

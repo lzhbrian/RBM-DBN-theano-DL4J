@@ -6,7 +6,7 @@
     * Email: _**lzhbrian@gmail.com**_ / **_linzh14@mails.tsinghua.edu.cn_**
     * My Linkedin Page: [**_林子恆 Lin, Tzu-Heng_**](https://cn.linkedin.com/in/lzhbrian)
 * My Java, Python Work for **_Pattern Recognition Course_**
-* -- Make a DBN to classify [a set of test data](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/testdataset) similar to [MNIST dataset](http://yann.lecun.com/exdb/mnist/) but with 32x32 pixels
+* -- Make a DBN to classify [a set of test data](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/testdatasset) similar to [MNIST dataset](http://yann.lecun.com/exdb/mnist/) but with 32x32 pixels
     * Using the framework of **_[DeepLeanring4j](http://deeplearning4j.org)_** and **_[theano](http://www.deeplearning.net/software/theano/)_**
 
 ***
@@ -78,16 +78,16 @@
 
 * **_受限波尔兹曼机 RBM_** (Restricted Boltmann Machine) :
     * RBM就是一个两层的层内没有互相连接, 层间所有都链接的一个二部图(如下图), v对应的这层称visible layer, h对应的这层称hidden layer
-    * ![pic From DL4J](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/Resources/RBM.png)
+    * ![pic From DL4J](https://raw.githubusercontent.com/lzhbrian/Pattern-Recognition-Homework-RBM/master/Resources/RBM.png)
     * (图片来自[DL4J](http://deeplearning4j.org))
     * Hinton在[文章](http://science.sciencemag.org/content/313/5786/504)中指出了一个能量函数, 每一张图片都对应了一个能量, 如下图。
-    * ![Energy Func](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/Resources/EnergyFunction.png)
+    * ![Energy Func](https://raw.githubusercontent.com/lzhbrian/Pattern-Recognition-Homework-RBM/master/Resources/EnergyFunction.png)
     * (图片来自网络)
     * 简单来说, 训练一个RBM(无监督学习), 就是要使得这个RBM接收到图片之后对应的能量函数达到最小。那么训练这个RBM有什么用呢? 不要着急。
 
 * **_深度置信网 DBN_** (Deep Believe Network) :
     * 所谓的DBN就是将几层RBM网络堆叠(Stack)起来(如下图), 下层的hiddenLayer等于上层的visibleLayer, 这样就可以形成一个多层神经网络(Neural Network), 训练方法其实就是从低到高一层一层的来训练RBM。
-    * ![DBN](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/Resources/DBN.png)
+    * ![DBN](https://raw.githubusercontent.com/lzhbrian/Pattern-Recognition-Homework-RBM/master/Resources/DBN.png)
     * (图片来自[theano](http://www.deeplearning.net/software/theano/))
 
 * **_预训练-调整 Pretrain_** (Initialize a good initial weight) - Finetuning(Backpropagation):
@@ -276,16 +276,15 @@
 
     * _**[theano](http://www.deeplearning.net/software/theano/)**_ : 这里使用了老师的数据集来进行测试
         * DBN ( [theano/DBN.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/theano/code/DBN.py) )
-        * 构造的DBN结构为：784-1000-1000-1000-10,
-        * 使用的预处理数据集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
-        * 使用的backprop训练集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
+        * 构造的DBN结构为：784-500-500-2000-10,
+        * 使用的预处理数据集大小为每次迭代10个元素, 迭代完MNIST的50000个元素。
+        * 使用的backprop训练集大小为每次迭代10个元素, 迭代完MNIST全部的50000个元素。
         * 一共对全部的元素训练10次(10 Epochs)。
         * 最后结果如下：
 
-				Optimization complete with best validation score of 2.020000 %,
-				obtained at iteration 50000, with test performance 1.840000 %
+				obtained at iteration 50000, with test performance 70.000000 %
 
-
+		* 测试结果不太好...我推测是因为老师给的测试集字体有粗有细，跟[MNIST](http://yann.lecun.com/exdb/mnist/)差的有点多, 所以效果非常差劲...
 
 
 
@@ -347,12 +346,13 @@
 	2016.6.24 01:50 Started Python Debugging
 	2016.6.24 03:13 I'm going to go to sleep first.
 	2016.6.24 10:10 Wake up, continue coding.
+	2016.6.24 13:29 All Done. Finished!
 
 
 ***
 
-* 林子恒 2016.6.24 中午 于寝室
+* 林子恒 2016.6.24 13:29 于紫荆公寓 1#
 * Lin, Tzu-Heng
-* 2016.6.24 noon at dorm
+* 2016.6.24 13:29 at dorm
 
 Copyright 2016 [**Lin, Tzu-Heng**](https://cn.linkedin.com/in/lzhbrian)
