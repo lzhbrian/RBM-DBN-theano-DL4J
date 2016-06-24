@@ -7,7 +7,7 @@
     * My Linkedin Page: [**_林子恆 Lin, Tzu-Heng_**](https://cn.linkedin.com/in/lzhbrian)
 * My Java, Python Work for **_Pattern Recognition Course_**
 * -- Make a DBN to classify [a set of test data](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/testdataset) similar to [MNIST dataset](http://yann.lecun.com/exdb/mnist/) but with 32x32 pixels
-    * Using the framework of **_[DeepLeanring4j](http://deeplearning4j.org)_** and **_[theano](http://deeplearning.net/)_**
+    * Using the framework of **_[DeepLeanring4j](http://deeplearning4j.org)_** and **_[theano](http://www.deeplearning.net/software/theano/)_**
 
 ***
 * 本篇报告是用markdown语法写的, 在[**_我的Github库(lzhbrian)_**](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM)里可以查到本篇报告, 以及报告里所提到代码的源文件
@@ -49,9 +49,9 @@
 ***
 
 * **_前言 About_**
-    * 本篇报告使用了[DeepLearning4j](http://deeplearning4j.org)（以下简称DL4J), 以及[theano](http://www.deeplearning.net/tutorial/DBN.html)的库训练了一个DBN来分类老师所给的32x32手写数据。
-    * [DL4J](http://deeplearning4j.org)在[IntelliJ IDEA CE](https://www.jetbrains.com/idea/)的IDE上进行编程, [theano](http://www.deeplearning.net/tutorial/DBN.html)是直接用[sublime3](http://www.sublimetext.com)写, 用命令行运行。
-    * 其实从第八周后我就开始写这个大作业了, 首先遇到的问题就是要选哪一个库, 那个时候Python和Java都不太熟练, 只会用Matlab。后来, 因为一些别的作业以及在做一些大数据方面的研究, Python以及Java运用得比较熟练了, 所以后来就使用了[theano](http://www.deeplearning.net/tutorial/DBN.html)与[DL4J](http://deeplearning4j.org); (同时,也切身感受到了Matlab的鸡肋,效率实在是太低了。)
+    * 本篇报告使用了[DeepLearning4j](http://deeplearning4j.org)（以下简称DL4J), 以及[theano](http://www.deeplearning.net/software/theano/)的库训练了一个DBN来分类老师所给的32x32手写数据。
+    * [DL4J](http://deeplearning4j.org)在[IntelliJ IDEA CE](https://www.jetbrains.com/idea/)的IDE上进行编程, [theano](http://www.deeplearning.net/software/theano/)是直接用[sublime3](http://www.sublimetext.com)写, 用命令行运行。
+    * 其实从第八周后我就开始写这个大作业了, 首先遇到的问题就是要选哪一个库, 那个时候Python和Java都不太熟练, 只会用Matlab。后来, 因为一些别的作业以及在做一些大数据方面的研究, Python以及Java运用得比较熟练了, 所以后来就使用了[theano](http://www.deeplearning.net/software/theano/)与[DL4J](http://deeplearning4j.org); (同时,也切身感受到了Matlab的鸡肋,效率实在是太低了。)
 
 * **_关于网络上的教程 About the Tutorials Online_**
     * 再后来看了很多很多RBM相关的教程, 网络上的教程真心都非常非常文言文, 而Hinton的那篇论文如果直接那来看的话其实一般人看不太懂(比如我)...所以我的撞墙期非常非常久, 直到考完试我才比较能够理解RBM、DBN的概念。
@@ -79,7 +79,7 @@
 * **_受限波尔兹曼机 RBM_** (Restricted Boltmann Machine) :
     * RBM就是一个两层的层内没有互相连接, 层间所有都链接的一个二部图(如下图), v对应的这层称visible layer, h对应的这层称hidden layer
     * ![pic From DL4J](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/Resources/RBM.png)
-    * (图片来自DL4J)
+    * (图片来自[DL4J](http://deeplearning4j.org))
     * Hinton在[文章](http://science.sciencemag.org/content/313/5786/504)中指出了一个能量函数, 每一张图片都对应了一个能量, 如下图。
     * ![Energy Func](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/Resources/EnergyFunction.png)
     * (图片来自网络)
@@ -88,7 +88,7 @@
 * **_深度置信网 DBN_** (Deep Believe Network) :
     * 所谓的DBN就是将几层RBM网络堆叠(Stack)起来(如下图), 下层的hiddenLayer等于上层的visibleLayer, 这样就可以形成一个多层神经网络(Neural Network), 训练方法其实就是从低到高一层一层的来训练RBM。
     * ![DBN](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/blob/master/Resources/DBN.png)
-    * (图片来自theano)
+    * (图片来自[theano](http://www.deeplearning.net/software/theano/))
 
 * **_预训练-调整 Pretrain_** (Initialize a good initial weight) - Finetuning(Backpropagation):
     * Hinton在[文章](http://science.sciencemag.org/content/313/5786/504)中提到, 多层神经网络有一个很本质的问题就在于使用如后向传播算法(backpropagation)来迭代网络时很依赖于初始值的选择, 非常容易就掉入到局部极小值的点。
@@ -101,7 +101,7 @@
 ### 4. 库的介绍与选择 Choice of Tools:
 ***
 
-* 我尝试使用了所有可能的工具, 包括Python的[theano](http://deeplearning.net/), [SciPy](http://scikit-learn.org/)＋[Opencv](http://opencv.org)的组合, 以及[DL4J](http://deeplearning4j.org/), 上述的这些库可以说是各有利弊, 我最终选择了使用[theano](http://deeplearning.net/)以及[DL4J](http://deeplearning4j.org/)都做了一些测试, 因为相比较于[SciPy](http://scikit-learn.org/)它们在DBN这块更专精。
+* 我尝试使用了所有可能的工具, 包括Python的[theano](http://www.deeplearning.net/software/theano/), [SciPy](http://scikit-learn.org/)＋[Opencv](http://opencv.org)的组合, 以及[DL4J](http://deeplearning4j.org/), 上述的这些库可以说是各有利弊, 我最终选择了使用[theano](http://www.deeplearning.net/software/theano/)以及[DL4J](http://deeplearning4j.org/)都做了一些测试, 因为相比较于[SciPy](http://scikit-learn.org/)它们在DBN这块更专精。
 
 * 下面是一些我参考过的库以及教程的链接, 我接下来对他们做一些我自己的比较粗浅的理解, 如有不妥之处, 还望大家指正。
 
@@ -120,7 +120,7 @@
     1. 第1个库就是鼎鼎大名的深度学习鼻祖[Hinton](http://www.cs.toronto.edu/%7Ehinton/)的Matlab库
     2. 上面第3个[DL4J](http://deeplearning4j.org/)的DBN用在[MNIST](http://yann.lecun.com/exdb/mnist/)上的教程将MNIST先二值化{0,1}, 然后用RBM进行pretrain、backprop, 我尝试了之后发现效果非常非常差劲; 虽然他在里面也有说, 里面可能要调一些参数,但是我调了非常非常久还是没什么效果。当然, 也很可能是我的能力问题...
     3. 第4个DL4J构建DBN用在[Iris](https://archive.ics.uci.edu/ml/datasets/Iris/)上的教程,与第3个不同,使用的是连续数值的RBM,训练的样本比较小,但构建网络的过程还是非常有参考价值的。
-    4. 第7个Python的[theano](http://deeplearning.net/)库, 里面的RBM构建起来稍微比较复杂一些, 但代码的质量还挺不错, 所以我最后主要是用它来处理。具体就是在Pretrain完之后使用Logistic Regression来进行回归、分类。
+    4. 第7个Python的[theano](http://www.deeplearning.net/software/theano/)库, 里面的RBM构建起来稍微比较复杂一些, 但代码的质量还挺不错, 所以我最后主要是用它来处理。具体就是在Pretrain完之后使用Logistic Regression来进行回归、分类。
     5. 第8、第9个使用了[SciPy](http://scikit-learn.org/)里的RBM; 也是在Pretrain完之后使用Logistic Regression来进行回归、分类。SciPy里目前好像还不支持连续值的RBM, 只有离散值的BernouliRBM这个二值的可以用。
 
 * Databases:
@@ -129,20 +129,20 @@
 
 ### 5. 我的工作 Configure a DBN using DL4J & theano:
 ***
-* 由于我主要使用的是[DL4J](http://deeplearning4j.org/)以及[theano](http://deeplearning.net/), 其他的一些库的具体操作就不在这里写出来了, 在我提供的上述网址里都可以找到还不错的教程!
+* 由于我主要使用的是[DL4J](http://deeplearning4j.org/)以及[theano](http://www.deeplearning.net/software/theano/), 其他的一些库的具体操作就不在这里写出来了, 在我提供的上述网址里都可以找到还不错的教程!
 
 * **前期准备: 编译环境、安装库 Prequisites**
-    * **_DL4J_**
+    * **_[DL4J](http://deeplearning4j.org)_**
         * 首先先按照了[DL4J的官方QUICKSTART](http://deeplearning4j.org/quickstart)网站, 搭建好了框架, 需要安装的工具有[github](https://github.com)、[maven](http://maven.apache.org)、[java](http://www.oracle.com/technetwork/java/javase/downloads/index.html)等, 官方推荐使用的IDE是[IntelliJ IDEA CE](https://www.jetbrains.com/idea/), 我现在在写的这个.md也是用这个IDE编辑的, 个人感觉其实用起来还是蛮舒服的。
 
-    * **_theano_**
+    * **_[theano](http://www.deeplearning.net/software/theano/)_**
         * 如果已经安装好了[Python](https://www.python.org), [pip](https://pip.pypa.io/en/stable/)等工具, 那就只需要```pip install theano```就可以了, 还需安装的库还有[PIL](http://www.pythonware.com/products/pil/#pil117), [NumPy](http://www.numpy.org)等
 
 * **一些代码的解释 Some Explanation**
 
     1. 如何构造一个DBN、DBN的参数含义
 
-	    * **_DL4J_**
+	    * **_[DL4J](http://deeplearning4j.org)_**
 	        * 使用DL4J来构造一个DBN非常非常简单
 	        * 比如如下给出的代码, 是二值DBN所使用的构造, 该DBN的结构为：784-500-500-2000-10
 	        * 具体参数的解释参见[DL4J的网站教程](http://deeplearning4j.org/iris-flower-dataset-tutorial), [JAVADOC](http://deeplearning4j.org/doc/), [JAVADOC for ND4J](http://nd4j.org/doc/)
@@ -175,17 +175,17 @@
 				                .nIn(2000).nOut(outputNum).build())
 				            .pretrain(true).backprop(false)
 				            .build();
-	   * **_theano_**
-	     * 使用theano来构造一个DBN也非常简单，因为库函数都已经写好了只需调用函数并写上参数即可, 如下的代码便可生成一个784-1000-1000-1000-10的DBN
-	     * 具体的参数设置解释参见[Official Totorial](http://deeplearning.net/tutorial/DBN.html), [theano DOC](http://deeplearning.net/tutorial/contents.html)
+	   * **_[theano](http://www.deeplearning.net/software/theano/)_**
+	     * 使用[theano](http://www.deeplearning.net/software/theano/)来构造一个DBN也非常简单，因为库函数都已经写好了只需调用函数并写上参数即可, 如下的代码便可生成一个784-1000-1000-1000-10的DBN
+	     * 具体的参数设置解释参见[Official Tutorial](http://deeplearning.net/tutorial/DBN.html), [theano DOC](http://deeplearning.net/tutorial/contents.html)
 
 					dbn = DBN(numpy_rng=numpy_rng, n_ins=28 * 28,
 		              hidden_layers_sizes=[1000, 1000, 1000],
 		              n_outs=10)
 
-    2. 读入老师提供的手写集数据 ( importpic.py )
+    2. 读入老师提供的手写集数据 ( [importpic.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/importpic.py) )
         * 这里给出如何利用Python读入老师所给数据的方法
-        * 读入数据后还要把它剪成28x28的大小, 同时也要转换成灰度值, 并且转换成[theano](http://deeplearning.net/)可读的文件类型
+        * 读入数据后还要把它剪成28x28的大小, 同时也要转换成灰度值, 并且转换成[theano](http://www.deeplearning.net/software/theano/)可读的文件类型
         * 这个文档是我测试用的.py, 具体的实现已经内嵌到[DBN.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/theano/code/)里了
         * 处理图片使用的库是[Opencv](http://opencv.org)以及[NumPy](http://www.numpy.org)
 
@@ -226,7 +226,7 @@
                             target = numpy.row_stack((target, 255 - img))
                         label.append(int(item[0]))
 
-        4. theano要求dataset必须要share过...具体share是什么参见[Elementwise](http://deeplearning.net/software/theano/library/tensor/basic.html#elementwise), [Tensortype](http://deeplearning.net/software/theano/library/tensor/basic.html)
+        4. [theano](http://www.deeplearning.net/software/theano/)要求dataset必须要share过...具体share是什么参见[Elementwise](http://deeplearning.net/software/theano/library/tensor/basic.html#elementwise), [Tensortype](http://deeplearning.net/software/theano/library/tensor/basic.html)
 
                 # share, readable by theano
                 test_X_matrix = numpy.asarray(target,dtype = float)
@@ -241,12 +241,12 @@
                 <TensorType(float64, matrix)>
                 Elemwise{Cast{int32}}.0
 
-        6. 然后就可以愉快的用[theano](http://deeplearning.net/)测试老师给的数据啦啦!
+        6. 然后就可以愉快的用[theano](http://www.deeplearning.net/software/theano/)测试老师给的数据啦啦!
 
 
 * **训练结果 Results**
-    * **_DL4J_** : 这里并没有用老师的数据进行测试, 因为构造出来的DBN, 使用MNIST本身进行测试就仅能有非常非常非常糟糕的结果。
-        * 二值RBM - DBN ( DL4J/BinaryDBN.java )
+    * **_[DL4J](http://deeplearning4j.org)_** : 这里并没有用老师的数据进行测试, 因为构造出来的DBN, 使用MNIST本身进行测试就仅能有非常非常非常糟糕的结果。
+        * 二值RBM - DBN ( [DL4J/BinaryDBN.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J) )
             * 我先尝试使用了binary即二值的DBN网络;
             *  如下, 第三个参数设为true即表示将Mnist的图片进行二值化, 灰度值大于35的即表示成1, 小于35的表示成0:
 
@@ -262,7 +262,7 @@
                      F1 Score:  0.1034
 					========================================================================
 
-        * FeedForward Layer - Direct backpropagation ( DL4J/FFbackprop.java )
+        * FeedForward Layer - Direct backpropagation ( [DL4J/FFbackprop.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J) )
             * 直接利用FeedForward Layer来进行backpropagation, 层数的设置为:`784-1000-10`
             * 每个训练迭代集个数为128(batchSize: 128), 从MNIST数据集中随机取出10000个元素, 一共对全部的元素训练15次(15 Epochs)
             * 结果非常好, 最后的结果可以达到:
@@ -274,8 +274,8 @@
 					 F1 Score:  0.9708
 					========================================================================
 
-    * _**theano**_ : 这里使用了老师的数据集来进行测试
-        * DBN ( theano/DBN.py )
+    * _**[theano](http://www.deeplearning.net/software/theano/)**_ : 这里使用了老师的数据集来进行测试
+        * DBN ( [theano/DBN.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/theano/code) )
         * 构造的DBN结构为：784-1000-1000-1000-10,
         * 使用的预处理数据集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
         * 使用的backprop训练集大小为每次迭代10个元素, 迭代完MNIST全部的60000个元素。
