@@ -287,12 +287,13 @@
 	2016.6.23 22:49 Abandon DL4J, Switching to theano, python
 	2016.6.24 01:50 Started Python Debugging
 	2016.6.24 03:13 I'm going to go to sleep first.
+	2016.6.24 10:10 Wake up, continue coding.
 
 
 ***
 
-* 林子恒 2016.6.24 中午
+* 林子恒 2016.6.24 中午 于寝室
 * Lin, Tzu-Heng
-* 2016.6.24 noon
+* 2016.6.24 noon at dorm
 
 Copyright 2016 [**Lin, Tzu-Heng**](https://cn.linkedin.com/in/lzhbrian)
