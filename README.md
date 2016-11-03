@@ -1,6 +1,40 @@
 # Pattern Recognition Work
 -- For a dataset similar to MNIST trained using MNIST
 
+```
+├── Dataset
+│   ├── modified_testdataset
+│   │   ├── 0-1.png
+│   │   ├── xxx.png
+│   └── testdatasset
+│       ├── 0-1.png
+│       ├── xxx.png
+├── LICENSE
+├── README.md
+├── Resources
+│   ├── DBN.png
+│   ├── EnergyFunction.png
+│   └── RBM.png
+└── src
+    ├── DL4J
+    │   ├── BinaryDBN.java
+    │   └── FFbackprop.java
+    ├── importpic.py
+    └── theano
+        ├── code
+        │   ├── DBN.py
+        │   ├── logistic_sgd.py
+        │   ├── logistic_sgd.pyc
+        │   ├── mlp.py
+        │   ├── mlp.pyc
+        │   ├── rbm.py
+        │   ├── rbm.pyc
+        │   ├── utils.py
+        │   └── utils.pyc
+        └── data
+            └── mnist.pkl.gz
+```
+
 * Work by **_Lin, Tzu-Heng_**, Dept. of Electronic Engineering, Tsinghua University
     * **电子工程系 无42 林子恒 2014011054**
     * Email: _**lzhbrian@gmail.com**_ / **_linzh14@mails.tsinghua.edu.cn_**
@@ -111,10 +145,10 @@
     3. [DL4J: A really brief intoduction about how to use DBN on a MNIST](http://deeplearning4j.org/deepbeliefnetwork.html) (Java)
     4. [DL4J: Brief instructions about how to use DBN on Iris DB](http://deeplearning4j.org/iris-flower-dataset-tutorial) (Java)
     5. [Theano](http://www.deeplearning.net/software/theano/) (Python)
-    5. [Theano: Guide for RBM](http://deeplearning.net/tutorial/rbm.html) (Python)
-    6. [Theano: Guide for DBN](http://deeplearning.net/tutorial/DBN.html) (Python)
-    6. [SciPy: Official Tutorial for RBM + Mnist](http://scikit-learn.org/dev/auto_examples/neural_networks/plot_rbm_logistic_classification.html) (Python)
-    7. [SciPy + Opencv: Tutorial MNIST by pyimagesearch.com](http://www.pyimagesearch.com/2014/06/23/applying-deep-learning-rbm-mnist-using-python/) (Python)
+    6. [Theano: Guide for RBM](http://deeplearning.net/tutorial/rbm.html) (Python)
+    7. [Theano: Guide for DBN](http://deeplearning.net/tutorial/DBN.html) (Python)
+    8. [SciPy: Official Tutorial for RBM + Mnist](http://scikit-learn.org/dev/auto_examples/neural_networks/plot_rbm_logistic_classification.html) (Python)
+    9. [SciPy + Opencv: Tutorial MNIST by pyimagesearch.com](http://www.pyimagesearch.com/2014/06/23/applying-deep-learning-rbm-mnist-using-python/) (Python)
 
 * Comments:
     1. 第1个库就是鼎鼎大名的深度学习鼻祖[Hinton](http://www.cs.toronto.edu/%7Ehinton/)的Matlab库
@@ -129,61 +163,61 @@
 
 ### 5. 我的工作 Configure a DBN using DL4J & theano:
 ***
-* 由于我主要使用的是[DL4J](http://deeplearning4j.org/)以及[theano](http://www.deeplearning.net/software/theano/), 其他的一些库的具体操作就不在这里写出来了, 在我提供的上述网址里都可以找到还不错的教程!
+*   由于我主要使用的是[DL4J](http://deeplearning4j.org/)以及[theano](http://www.deeplearning.net/software/theano/), 其他的一些库的具体操作就不在这里写出来了, 在我提供的上述网址里都可以找到还不错的教程!
 
-* **前期准备: 编译环境、安装库 Prequisites**
+*   **前期准备: 编译环境、安装库 Prequisites**
     * **_[DL4J](http://deeplearning4j.org)_**
         * 首先先按照了[DL4J的官方QUICKSTART](http://deeplearning4j.org/quickstart)网站, 搭建好了框架, 需要安装的工具有[github](https://github.com)、[maven](http://maven.apache.org)、[java](http://www.oracle.com/technetwork/java/javase/downloads/index.html)等, 官方推荐使用的IDE是[IntelliJ IDEA CE](https://www.jetbrains.com/idea/), 我现在在写的这个.md也是用这个IDE编辑的, 个人感觉其实用起来还是蛮舒服的。
 
     * **_[theano](http://www.deeplearning.net/software/theano/)_**
         * 如果已经安装好了[Python](https://www.python.org), [pip](https://pip.pypa.io/en/stable/)等工具, 那就只需要```pip install theano```就可以了, 还需安装的库还有[PIL](http://www.pythonware.com/products/pil/#pil117), [NumPy](http://www.numpy.org)等
 
-* **一些代码的解释 Some Explanation**
+*   **一些代码的解释 Some Explanation**
 
-    1. 如何构造一个DBN、DBN的参数含义
+    1.  如何构造一个DBN、DBN的参数含义
 
-	    * **_[DL4J](http://deeplearning4j.org)_**
-	        * 使用DL4J来构造一个DBN非常非常简单
-	        * 比如如下给出的代码, 是二值DBN所使用的构造, 该DBN的结构为：784-500-500-2000-10
-	        * 具体参数的解释参见[DL4J的网站教程](http://deeplearning4j.org/iris-flower-dataset-tutorial), [JAVADOC](http://deeplearning4j.org/doc/), [JAVADOC for ND4J](http://nd4j.org/doc/)
+        *   **_[DL4J](http://deeplearning4j.org)_**
+            * 使用DL4J来构造一个DBN非常非常简单
+            * 比如如下给出的代码, 是二值DBN所使用的构造, 该DBN的结构为：784-500-500-2000-10
+            * 具体参数的解释参见[DL4J的网站教程](http://deeplearning4j.org/iris-flower-dataset-tutorial), [JAVADOC](http://deeplearning4j.org/doc/), [JAVADOC for ND4J](http://nd4j.org/doc/)
 
-				    MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-				            .seed(seed)
-				            .gradientNormalization(GradientNormalization.ClipElementWiseAbsoluteValue)
-				            .gradientNormalizationThreshold(1.0)
-				            .iterations(iterations)
-				            .momentum(0.5)
-				            .momentumAfter(Collections.singletonMap(3, 0.9))
-				            .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
-				            .list(4)
-				            .layer(0, new RBM.Builder().nIn(numRows*numColumns).nOut(500)
-				                .weightInit(WeightInit.XAVIER).lossFunction(LossFunction.RMSE_XENT)
-				                .visibleUnit(RBM.VisibleUnit.BINARY)
-				                .hiddenUnit(RBM.HiddenUnit.BINARY)
-				                .build())
-				            .layer(1, new RBM.Builder().nIn(500).nOut(500)
-				                .weightInit(WeightInit.XAVIER).lossFunction(LossFunction.RMSE_XENT)
-				                .visibleUnit(RBM.VisibleUnit.BINARY)
-				                .hiddenUnit(RBM.HiddenUnit.BINARY)
-				                .build())
-				            .layer(2, new RBM.Builder().nIn(500).nOut(2000)
-				                .weightInit(WeightInit.XAVIER).lossFunction(LossFunction.RMSE_XENT)
-				                .visibleUnit(RBM.VisibleUnit.BINARY)
-				                .hiddenUnit(RBM.HiddenUnit.BINARY)
-				                .build())
-				            .layer(3, new OutputLayer.Builder(LossFunction.NEGATIVELOGLIKELIHOOD).activation("softmax")
-				                .nIn(2000).nOut(outputNum).build())
-				            .pretrain(true).backprop(false)
-				            .build();
-	   * **_[theano](http://www.deeplearning.net/software/theano/)_**
-	     * 使用[theano](http://www.deeplearning.net/software/theano/)来构造一个DBN也非常简单，因为库函数都已经写好了只需调用函数并写上参数即可, 如下的代码便可生成一个784-1000-1000-1000-10的DBN
-	     * 具体的参数设置解释参见[Official Tutorial](http://deeplearning.net/tutorial/DBN.html), [theano DOC](http://deeplearning.net/tutorial/contents.html)
+                  MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
+                          .seed(seed)
+                          .gradientNormalization(GradientNormalization.ClipElementWiseAbsoluteValue)
+                          .gradientNormalizationThreshold(1.0)
+                          .iterations(iterations)
+                          .momentum(0.5)
+                          .momentumAfter(Collections.singletonMap(3, 0.9))
+                          .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
+                          .list(4)
+                          .layer(0, new RBM.Builder().nIn(numRows*numColumns).nOut(500)
+                              .weightInit(WeightInit.XAVIER).lossFunction(LossFunction.RMSE_XENT)
+                              .visibleUnit(RBM.VisibleUnit.BINARY)
+                              .hiddenUnit(RBM.HiddenUnit.BINARY)
+                              .build())
+                          .layer(1, new RBM.Builder().nIn(500).nOut(500)
+                              .weightInit(WeightInit.XAVIER).lossFunction(LossFunction.RMSE_XENT)
+                              .visibleUnit(RBM.VisibleUnit.BINARY)
+                              .hiddenUnit(RBM.HiddenUnit.BINARY)
+                              .build())
+                          .layer(2, new RBM.Builder().nIn(500).nOut(2000)
+                              .weightInit(WeightInit.XAVIER).lossFunction(LossFunction.RMSE_XENT)
+                              .visibleUnit(RBM.VisibleUnit.BINARY)
+                              .hiddenUnit(RBM.HiddenUnit.BINARY)
+                              .build())
+                          .layer(3, new OutputLayer.Builder(LossFunction.NEGATIVELOGLIKELIHOOD).activation("softmax")
+                              .nIn(2000).nOut(outputNum).build())
+                          .pretrain(true).backprop(false)
+                          .build();
+    *    **_[theano](http://www.deeplearning.net/software/theano/)_**
+         * 使用[theano](http://www.deeplearning.net/software/theano/)来构造一个DBN也非常简单，因为库函数都已经写好了只需调用函数并写上参数即可, 如下的代码便可生成一个784-1000-1000-1000-10的DBN
+         * 具体的参数设置解释参见[Official Tutorial](http://deeplearning.net/tutorial/DBN.html), [theano DOC](http://deeplearning.net/tutorial/contents.html)
 
-					dbn = DBN(numpy_rng=numpy_rng, n_ins=28 * 28,
-		              hidden_layers_sizes=[1000, 1000, 1000],
-		              n_outs=10)
+           		dbn = DBN(numpy_rng=numpy_rng, n_ins=28 * 28,
+           	        hidden_layers_sizes=[1000, 1000, 1000],
+           	        n_outs=10)
 
-    2. 读入老师提供的手写集数据 ( [importpic.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/importpic.py) )
+    2.  读入老师提供的手写集数据 ( [importpic.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/importpic.py) )
         * 这里给出如何利用Python读入老师所给数据的方法
         * 读入数据后还要把它剪成28x28的大小, 同时也要转换成灰度值, 并且转换成[theano](http://www.deeplearning.net/software/theano/)可读的文件类型
         * 这个文档是我测试用的.py, 具体的实现已经内嵌到[DBN.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/theano/code/)里了
@@ -231,7 +265,7 @@
                 # share, readable by theano
                 test_X_matrix = numpy.asarray(target,dtype = float)
                 test_set_x = theano.shared(test_X_matrix) #
-
+               
                 test_Y_vector = numpy.asarray(label)
                 shared_var_Y = theano.shared(test_Y_vector)
                 test_set_y = T.cast(shared_var_Y, 'int32') #
@@ -244,37 +278,37 @@
         6. 然后就可以愉快的用[theano](http://www.deeplearning.net/software/theano/)测试老师给的数据啦啦!
 
 
-* **训练结果 Results**
-    * **_[DL4J](http://deeplearning4j.org)_** : 这里并没有用老师的数据进行测试, 因为构造出来的DBN, 使用MNIST本身进行测试就仅能有非常非常非常糟糕的结果。
-        * 二值RBM - DBN ( [DL4J/BinaryDBN.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J/BinaryDBN.java) )
+*   **训练结果 Results**
+    *   **_[DL4J](http://deeplearning4j.org)_** : 这里并没有用老师的数据进行测试, 因为构造出来的DBN, 使用MNIST本身进行测试就仅能有非常非常非常糟糕的结果。
+        *   二值RBM - DBN ( [DL4J/BinaryDBN.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J/BinaryDBN.java) )
             * 我先尝试使用了binary即二值的DBN网络;
-            *  如下, 第三个参数设为true即表示将Mnist的图片进行二值化, 灰度值大于35的即表示成1, 小于35的表示成0:
+            * 如下, 第三个参数设为true即表示将Mnist的图片进行二值化, 灰度值大于35的即表示成1, 小于35的表示成0:
 
                     DataSetIterator iter = new MnistDataSetIterator(batchSize,numSamples,true);
 
             * 但是训练出来的结果非常非常差劲, 在pretrain的过程中, 甚至误差越训练越大, 具体的原因我找了非常非常久, 调试了各种各样的参数, 但还是找不出来我的代码里到底哪里有问题。
             * 最后的分类结果如下, 我甚至怀疑是DL4J本身的库里的RBM函数出了问题, 因为使用别种layer来训练, 同样的训练、测试集、迭代次数,都能有还不错的结果。
 
-					==========================Scores========================================
-                     Accuracy:  0.107
-                     Precision: 0.107
-                     Recall:    0.1
-                     F1 Score:  0.1034
-					========================================================================
+              	==========================Scores========================================
+              	   Accuracy:  0.107
+              	   Precision: 0.107
+              	   Recall:    0.1
+              	   F1 Score:  0.1034
+              	========================================================================
 
-        * FeedForward Layer - Direct backpropagation ( [DL4J/FFbackprop.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J/FFbackprop.java) )
+        *   FeedForward Layer - Direct backpropagation ( [DL4J/FFbackprop.java](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/DL4J/FFbackprop.java) )
             * 直接利用FeedForward Layer来进行backpropagation, 层数的设置为:`784-1000-10`
             * 每个训练迭代集个数为128(batchSize: 128), 从MNIST数据集中随机取出10000个元素, 一共对全部的元素训练15次(15 Epochs)
             * 结果非常好, 最后的结果可以达到:
 
-					==========================Scores========================================
-					 Accuracy:  0.971
-					 Precision: 0.9709
-					 Recall:    0.9707
-					 F1 Score:  0.9708
-					========================================================================
+              	==========================Scores========================================
+              	 Accuracy:  0.971
+              	 Precision: 0.9709
+              	 Recall:    0.9707
+              	 F1 Score:  0.9708
+              	========================================================================
 
-    * _**[theano](http://www.deeplearning.net/software/theano/)**_ : 这里使用了老师的数据集来进行测试
+    *   _**[theano](http://www.deeplearning.net/software/theano/)**_ : 这里使用了老师的数据集来进行测试
         * DBN ( [theano/DBN.py](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/theano/code/DBN.py) )
         * 构造的DBN结构为：784-500-500-2000-10,
         * 使用的预处理数据集大小为每次迭代10个元素, 迭代完MNIST的50000个元素。
@@ -282,14 +316,14 @@
         * 一共对全部的元素训练10次(10 Epochs)。
         * 最后结果如下：
 
-				obtained at iteration 50000, with test performance 70.000000 %
+          	obtained at iteration 50000, with test performance 70.000000 %
 
-		* 测试结果不太好...我推测是因为老师给的测试集字体有粗有细，跟[MNIST](http://yann.lecun.com/exdb/mnist/)差的有点多, 所以效果非常差劲...
+        * 测试结果不太好...我推测是因为老师给的测试集字体有粗有细，跟[MNIST](http://yann.lecun.com/exdb/mnist/)差的有点多, 所以效果非常差劲...
 
 
 
-* **结论 Conclusions**
-    1. 做完上述的东西后, 我在网上查阅了一些别人对RBM、DBN、Pretrain等的评价
+*   **结论 Conclusions**
+    1.  做完上述的东西后, 我在网上查阅了一些别人对RBM、DBN、Pretrain等的评价
 
         > 过时了，没用了，看最近的会议就知道了，今年nips一篇都没有了！
 
@@ -300,9 +334,9 @@
         当然也有人指出:
         > 有用, 实际应用的问题哪裡会所有资料全都有标籤? 深度学习论文常用的资料集, 都有人好心事先土法炼钢标好标籤, 导致后进作论文跟算法的人貌似都没有在人工上标籤,才会误为预训练没用。有预训练才能利用大量没有标籤的资料集作半监督学习, 防止只有少数标籤的资料集过拟合或拟合不足
 
-    2. 发现其实现在很多人对于Pretrain这件事情并没有这么看好了, 因为其实用大量监督数据直接做训练, 完全可以弥补; 我做的东西也是, 其实Pretrain相较于直接进行backpropagation并没有这么好, 而且如果使用相同的迭代次数, 效率相较于后者并不高, 因为pretrain阶段其实也是非常消耗时间的。
+    2.  发现其实现在很多人对于Pretrain这件事情并没有这么看好了, 因为其实用大量监督数据直接做训练, 完全可以弥补; 我做的东西也是, 其实Pretrain相较于直接进行backpropagation并没有这么好, 而且如果使用相同的迭代次数, 效率相较于后者并不高, 因为pretrain阶段其实也是非常消耗时间的。
 
-    3. 当然上上条后者指出的实际问题没有标签也是一个大问题, 毕竟还没有这方面的经验, 我也不好对此作出评价。
+    3.  当然上上条后者指出的实际问题没有标签也是一个大问题, 毕竟还没有这方面的经验, 我也不好对此作出评价。
 
 
 
@@ -318,7 +352,7 @@
 
 
 
-* 关于模式识别课程:
+*   关于模式识别课程:
 
     * 虽然还只是大二、还没修概率论, 后来的一些课程在课堂上时有一些跟不上, 但我在课后自己读[Duda的Pattern Classification](http://as.wiley.com/WileyCDA/WileyTitle/productCd-0471056693.html)还算能读懂。不得不提, 有几次的Matlab作业花了我非常非常多的时间...
 
@@ -326,9 +360,9 @@
 
     * 这个学期我也参加了一个SRT项目, 关于大数据的电商分析。前阵子与一名我们系的博士生以及本科生co-author了一篇paper, 现在正在投稿到[Ubicomp](http://ubicomp.org/ubicomp2016/), 不知道能否被接受;但不得不说的是, 我在分析数据时使用的一些方法就是在课程当中学到的内容, 学以致用的感觉让我非常满足。
 
-	***
-	* _**与老师相处的这一个学期非常愉快也非常充实, 希望以后还有机会可以上老师的课 !**_
-	* _**最后, 谢谢老师、助教这一学期来的帮助与指导 !**_
+    ***
+    * _**与老师相处的这一个学期非常愉快也非常充实, 希望以后还有机会可以上老师的课 !**_
+    * _**最后, 谢谢老师、助教这一学期来的帮助与指导 !**_
 
 
 ### 7. 附录 Log
@@ -347,7 +381,6 @@
 	2016.6.24 03:13 I'm going to go to sleep first.
 	2016.6.24 10:10 Wake up, continue coding.
 	2016.6.24 13:29 All Done. Finished!
-
 
 ***
 
