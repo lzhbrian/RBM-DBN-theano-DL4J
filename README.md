@@ -1,39 +1,6 @@
 # Pattern Recognition Work
 -- For a dataset similar to MNIST trained using MNIST
 
-```
-├── Dataset
-│   ├── modified_testdataset
-│   │   ├── 0-1.png
-│   │   ├── xxx.png
-│   └── testdatasset
-│       ├── 0-1.png
-│       ├── xxx.png
-├── LICENSE
-├── README.md
-├── Resources
-│   ├── DBN.png
-│   ├── EnergyFunction.png
-│   └── RBM.png
-└── src
-    ├── DL4J
-    │   ├── BinaryDBN.java
-    │   └── FFbackprop.java
-    ├── importpic.py
-    └── theano
-        ├── code
-        │   ├── DBN.py
-        │   ├── logistic_sgd.py
-        │   ├── logistic_sgd.pyc
-        │   ├── mlp.py
-        │   ├── mlp.pyc
-        │   ├── rbm.py
-        │   ├── rbm.pyc
-        │   ├── utils.py
-        │   └── utils.pyc
-        └── data
-            └── mnist.pkl.gz
-```
 
 * Work by **_Lin, Tzu-Heng_**, Dept. of Electronic Engineering, Tsinghua University
     * **电子工程系 无42 林子恒 2014011054**
@@ -42,10 +9,6 @@
 * My Java, Python Work for **_Pattern Recognition Course_**
 * -- Make a DBN to classify [a set of test data](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM/tree/master/testdatasset) similar to [MNIST dataset](http://yann.lecun.com/exdb/mnist/) but with 32x32 pixels
     * Using the framework of **_[DeepLeanring4j](http://deeplearning4j.org)_** and **_[theano](http://www.deeplearning.net/software/theano/)_**
-
-***
-* 本篇报告是用markdown语法写的, 在[**_我的Github库(lzhbrian)_**](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM)里可以查到本篇报告, 以及报告里所提到代码的源文件
-* This Report is written in markdown syntax, see the original file in my github projects mentioned below. Repository is in my github page: [**_My Github Project Page(lzhbrian)_**](https://github.com/lzhbrian/Pattern-Recognition-Homework-RBM)
 
 
 # 报告 Report
